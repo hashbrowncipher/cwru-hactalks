@@ -2,6 +2,7 @@ from google.appengine.ext import db
 
 class Talk(db.Model):
 	name = db.StringProperty(required=True)
+	description = db.StringProperty(required=True)
 	speaker = db.StringProperty(required=True)
 	votes = db.IntegerProperty(required=True)
 
