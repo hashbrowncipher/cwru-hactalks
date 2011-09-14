@@ -15,6 +15,8 @@ from werkzeug.wrappers import BaseResponse
 from CASClient import CASClient
 from models import Talk, Vote
 
+authorized_users = ('fxh32', 'cxw158', 'jas404', 'srj15')
+
 app = Flask(__name__)
 
 def log_warn(s):
@@ -88,7 +90,7 @@ def create_talk():
 @app.route("/talk/create", methods=['GET'])
 @with_netid
 def create_talk_form(netid):
-	if netid not in ('fxh32', 'cxw158', 'jas404', 'srj15'):
+	if netid not in authorized_users:
 		return redirect(url_for('index'))
 	
 	return render_template('create_talk_form.html')
@@ -96,7 +98,7 @@ def create_talk_form(netid):
 @app.route("/talk/delete/<int:talk_id>")
 @with_netid
 def delete_talk(netid, talk_id):
-	if netid not in ('fxh32', 'cxw158', 'jas404', 'srj15'):
+	if netid not in authorized_users:
 		return redirect(url_for('index'))
 
 	talk = Talk.get_by_id(talk_id)
